@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Planejador</title>
+
+    <meta
+        name="description"
+        content="Planejador gratuito para organizar semana, viagens e estudos."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/storage.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>Planejador</h1>
+
+        <p>
+            Organize sua semana, suas viagens e seus estudos.
+        </p>
+
+        <button
+            type="button"
+            id="theme-button"
+            aria-label="Alternar modo claro e escuro"
+        >
+            Modo escuro
+        </button>
+    </header>
+
+    <main>
+
+        <section
+            class="mode-selector"
+            aria-labelledby="mode-title"
+        >
+
+            <h2 id="mode-title">
+                O que você quer planejar?
+            </h2>
+
+            <div class="mode-buttons">
+
+                <button
+                    type="button"
+                    id="week-button"
+                    data-mode="week"
+                >
+                    Semana
+                </button>
+
+                <button
+                    type="button"
+                    id="travel-button"
+                    data-mode="travel"
+                >
+                    Viagem
+                </button>
+
+                <button
+                    type="button"
+                    id="study-button"
+                    data-mode="study"
+                >
+                    Estudos
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section
+            id="week-section"
+            class="planner-section"
+            aria-labelledby="week-title"
+        >
+
+            <h2 id="week-title">
+                Planejamento da Semana
+            </h2>
+
+            <p>
+                Organize suas tarefas de segunda-feira a domingo.
+            </p>
+
+            <form id="week-form">
+
+                <label for="week-day">
+                    Dia da semana
+                </label>
+
+                <select
+                    id="week-day"
+                    name="day"
+                    required
+                >
+                    <option value="">
+                        Selecione um dia
+                    </option>
+
+                    <option value="monday">
+                        Segunda-feira
+                    </option>
+
+                    <option value="tuesday">
+                        Terça-feira
+                    </option>
+
+                    <option value="wednesday">
+                        Quarta-feira
+                    </option>
+
+                    <option value="thursday">
+                        Quinta-feira
+                    </option>
+
+                    <option value="friday">
+                        Sexta-feira
+                    </option>
+
+                    <option value="saturday">
+                        Sábado
+                    </option>
+
+                    <option value="sunday">
+                        Domingo
+                    </option>
+                </select>
+
+                <label for="week-task">
+                    Tarefa
+                </label>
+
+                <input
+                    type="text"
+                    id="week-task"
+                    name="task"
+                    maxlength="160"
+                    required
+                    placeholder="Ex.: Fazer compras"
+                >
+
+                <button type="submit">
+                    Adicionar tarefa
+                </button>
+
+            </form>
+
+            <div
+                id="week-list"
+                aria-live="polite"
+            >
+            </div>
+
+        </section>
+
+
+        <section
+            id="travel-section"
+            class="planner-section"
+            aria-labelledby="travel-title"
+            hidden
+        >
+
+            <h2 id="travel-title">
+                Planejamento de Viagem
+            </h2>
+
+            <p>
+                Monte seu roteiro com data, horário, local e observações.
+            </p>
+
+            <form id="travel-form">
+
+                <label for="travel-date">
+                    Data
+                </label>
+
+                <input
+                    type="date"
+                    id="travel-date"
+                    name="date"
+                    required
+                >
+
+                <label for="travel-time">
+                    Horário
+                </label>
+
+                <input
+                    type="time"
+                    id="travel-time"
+                    name="time"
+                    required
+                >
+
+                <label for="travel-place">
+                    Local
+                </label>
+
+                <input
+                    type="text"
+                    id="travel-place"
+                    name="place"
+                    maxlength="80"
+                    required
+                    placeholder="Ex.: Museu"
+                >
+
+                <label for="travel-notes">
+                    Observações
+                </label>
+
+                <textarea
+                    id="travel-notes"
+                    name="notes"
+                    maxlength="300"
+                    rows="4"
+                    placeholder="Ex.: Comprar ingresso antecipadamente"
+                ></textarea>
+
+                <button type="submit">
+                    Adicionar ao roteiro
+                </button>
+
+            </form>
+
+            <div
+                id="travel-list"
+                aria-live="polite"
+            >
+            </div>
+
+        </section>
+
+
+        <section
+            id="study-section"
+            class="planner-section"
+            aria-labelledby="study-title"
+            hidden
+        >
+
+            <h2 id="study-title">
+                Planejamento de Estudos
+            </h2>
+
+            <p>
+                Escolha a matéria e defina o que estudar em cada dia.
+            </p>
+
+            <form id="study-form">
+
+                <label for="study-day">
+                    Dia da semana
+                </label>
+
+                <select
+                    id="study-day"
+                    name="day"
+                    required
+                >
+                    <option value="">
+                        Selecione um dia
+                    </option>
+
+                    <option value="monday">
+                        Segunda-feira
+                    </option>
+
+                    <option value="tuesday">
+                        Terça-feira
+                    </option>
+
+                    <option value="wednesday">
+                        Quarta-feira
+                    </option>
+
+                    <option value="thursday">
+                        Quinta-feira
+                    </option>
+
+                    <option value="friday">
+                        Sexta-feira
+                    </option>
+
+                    <option value="saturday">
+                        Sábado
+                    </option>
+
+                    <option value="sunday">
+                        Domingo
+                    </option>
+                </select>
+
+                <label for="study-subject">
+                    Matéria
+                </label>
+
+                <input
+                    type="text"
+                    id="study-subject"
+                    name="subject"
+                    maxlength="60"
+                    required
+                    placeholder="Ex.: Matemática"
+                >
+
+                <label for="study-content">
+                    O que estudar?
+                </label>
+
+                <textarea
+                    id="study-content"
+                    name="content"
+                    maxlength="300"
+                    rows="4"
+                    required
+                    placeholder="Ex.: Equações do primeiro grau"
+                ></textarea>
+
+                <button type="submit">
+                    Adicionar estudo
+                </button>
+
+            </form>
+
+            <div
+                id="study-list"
+                aria-live="polite"
+            >
+            </div>
+
+        </section>
+
+
+        <section
+            id="data-tools"
+            class="data-tools"
+            aria-labelledby="data-tools-title"
+        >
+
+            <h2 id="data-tools-title">
+                Seus dados
+            </h2>
+
+            <p>
+                Faça backup dos seus planejamentos ou imprima o modo atual.
+            </p>
+
+            <div class="tool-buttons">
+
+                <button
+                    type="button"
+                    id="export-button"
+                >
+                    Exportar JSON
+                </button>
+
+                <button
+                    type="button"
+                    id="import-button"
+                >
+                    Importar JSON
+                </button>
+
+                <button
+                    type="button"
+                    id="print-button"
+                >
+                    Imprimir
+                </button>
+
+            </div>
+
+            <input
+                type="file"
+                id="import-file"
+                class="file-input"
+                accept=".json,application/json"
+            >
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>
+            Seus dados ficam salvos somente no seu navegador.
+        </p>
+    </footer>
+
+</body>
+</html>
